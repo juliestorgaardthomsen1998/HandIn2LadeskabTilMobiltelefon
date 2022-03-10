@@ -7,6 +7,7 @@ namespace LadeskabTilMobiltelefon
         static void Main(string[] args)
         {
             Console.WriteLine("Ladeskab til mobiltelefon");
+
             // Assemble your system here from all the classes
 
             bool finish = false;
