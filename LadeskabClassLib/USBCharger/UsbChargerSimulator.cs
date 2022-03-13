@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LadeskabClassLib
+namespace LadeskabClassLib.USBCharger
 {
     public class UsbChargerSimulator : IUsbCharger
     {

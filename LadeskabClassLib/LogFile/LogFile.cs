@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LadeskabClassLib
+namespace LadeskabClassLib.LogFile
 {
-    class Display
+    class LogFile
     {
     }
 }

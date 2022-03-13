@@ -4,18 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LadeskabClassLib
+namespace LadeskabClassLib.RfidReader
 {
-    public class RfidChangedEventArgs : EventArgs
-    {
-        public bool RfidReader { get; set; }
-    }
-    
-    public interface IRfidReader
-    {
-        event EventHandler<RfidChangedEventArgs> RfidChangedEvent;
-    }
-
     public class RfidReader : IRfidReader
     {
         public event EventHandler<RfidChangedEventArgs> RfidChangedEvent;

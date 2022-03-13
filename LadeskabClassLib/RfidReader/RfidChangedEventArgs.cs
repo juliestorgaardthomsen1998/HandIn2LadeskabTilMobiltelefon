@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LadeskabClassLib
+namespace LadeskabClassLib.RfidReader
 {
-    class LogFile
+    public class RfidChangedEventArgs : EventArgs
     {
+        public bool RfidReader { get; set; }
     }
 }

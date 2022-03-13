@@ -4,20 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LadeskabClassLib
+namespace LadeskabClassLib.Door
 {
-    public class DoorChangedEventArgs : EventArgs
-    {
-        public bool Door { get; set; }
-    }
-
-    public interface IDoor
-    {
-        event EventHandler<DoorChangedEventArgs> DoorChangedEvent;
-
-        public void LockDoor();
-    }
-
     public class Door : IDoor
     {
         private bool oldDoorStatus;
@@ -39,6 +27,11 @@ namespace LadeskabClassLib
         }
 
         public void LockDoor()
+        {
+
+        }
+
+        public void UnlockDoor()
         {
 
         }
