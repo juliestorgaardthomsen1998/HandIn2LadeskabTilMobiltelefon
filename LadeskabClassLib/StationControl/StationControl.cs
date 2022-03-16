@@ -4,9 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Ladeskab.Interfaces;
+using LadeskabClassLib.USBCharger;
+using LadeskabClassLib.Door;
 
-namespace LadeskabClassLib
+namespace LadeskabClassLib.StationControl
 {
     public class StationControl
     {
