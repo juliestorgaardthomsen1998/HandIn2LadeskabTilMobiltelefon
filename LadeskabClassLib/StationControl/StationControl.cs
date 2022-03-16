@@ -33,12 +33,18 @@ namespace LadeskabClassLib.StationControl
 
         // Her mangler constructor
 
+        private void HandleRfidEvent(object sender, RfidChangedEventArgs rfidReader)
+        {
+            if (_door.DoorChangedEvent == false)
+            {
+
+            }
+        }
+
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
         private void RfidDetected(int id)
         {
-            if (_door.DoorChangedEvent == true && _door.DoorChangedEvent == false) //Der skal ske noget hvis døren låses
-            {
-                switch (_state)
+            switch (_state)
                 {
                     case LadeskabState.Available:
                         // Check for ladeforbindelse
@@ -87,7 +93,7 @@ namespace LadeskabClassLib.StationControl
 
                         break;
                 }
-            }
+            
         }
 
         // Her mangler de andre trigger handlere
