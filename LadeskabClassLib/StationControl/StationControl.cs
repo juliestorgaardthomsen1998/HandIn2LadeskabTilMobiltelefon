@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using LadeskabClassLib.USBCharger;
 using LadeskabClassLib.Door;
-using LadeskabClassLib.RfidReader;
-using LadeskabClassLib.Display;
 
 namespace LadeskabClassLib.StationControl
 {

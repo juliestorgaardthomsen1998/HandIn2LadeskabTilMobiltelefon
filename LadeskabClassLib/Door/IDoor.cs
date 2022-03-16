@@ -10,7 +10,8 @@ namespace LadeskabClassLib.Door
     {
         event EventHandler<DoorChangedEventArgs> DoorChangedEvent;
 
-        public void LockDoor();
-        public void UnlockDoor();
+        void LockDoor();
+
+        void UnlockDoor();
     }
 }
