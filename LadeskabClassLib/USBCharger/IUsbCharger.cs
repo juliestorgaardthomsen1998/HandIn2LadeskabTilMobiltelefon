@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LadeskabClassLib
+namespace LadeskabClassLib.USBCharger
 {
     public class CurrentEventArgs : EventArgs
     {
