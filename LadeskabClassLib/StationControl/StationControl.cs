@@ -28,6 +28,7 @@ namespace LadeskabClassLib.StationControl
         private int _oldId;
         private IDoor _door;
         private IRfidReader _rfidReader;
+        private int rfidID;
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
@@ -39,11 +40,49 @@ namespace LadeskabClassLib.StationControl
             _rfidReader = rfidReader;
         }
 
-        private void HandleRfidEvent(object sender, RfidChangedEventArgs rfidReader)
+        private void HandleRfidEvent(int rfidID, RfidChangedEventArgs rfidReader)
         {
-            if (_door.DoorChangedEvent == false)
+            if (_door.IsLocked == false&&_door.IsOpen==false) // hvis døren ikke er låst. Skal lige have lavet det ordenligt
             {
+                switch (_charger.Connected()) // hvorfor virker denne ikke?
+                {
+                    case true:
+                        rfidID = rfidReader.ID;
+                        _charger.StartCharge();
+                        _door.LockDoor(); // skal denne kunne tage et ID?
+                        using (var writer = File.AppendText(logFile))
+                        {
+                            writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", rfidID);
+                        }
 
+                        Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
+                        _state = LadeskabState.Locked;
+                        break;
+
+                    case false:
+                        Console.WriteLine("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
+                        break;
+                }
+            }
+            else if (_door.IsLocked)
+            {
+                switch (CheckId(rfidReader.ID))
+                {
+                    case true:
+                        _charger.StopCharge();
+                        _door.UnlockDoor();
+                        using (var writer = File.AppendText(logFile))
+                        {
+                            writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", rfidID );
+                        }
+
+                        Console.WriteLine("Tag din telefon ud af skabet og luk døren");
+                        break;
+
+                    case false:
+                        Console.WriteLine("Forkert RFID tag");
+                        break;
+                }
             }
         }
 
@@ -103,7 +142,15 @@ namespace LadeskabClassLib.StationControl
         }
 
         // Her mangler de andre trigger handlere
+        private bool CheckId(int id)
+        {
+            if (rfidID == id)
+            {
+                return true;
+            }
 
-        
+            return false;
+        }
+
     }
 }
