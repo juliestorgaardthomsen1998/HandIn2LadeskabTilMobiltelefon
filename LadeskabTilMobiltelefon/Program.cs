@@ -1,4 +1,5 @@
 ﻿using System;
+using LadeskabClassLib.Door;
 
 namespace LadeskabTilMobiltelefon
 {
@@ -6,6 +7,8 @@ namespace LadeskabTilMobiltelefon
     {
         static void Main(string[] args)
         {
+            Door door = new Door();
+
             Console.WriteLine("Ladeskab til mobiltelefon");
 
             // Assemble your system here from all the classes
