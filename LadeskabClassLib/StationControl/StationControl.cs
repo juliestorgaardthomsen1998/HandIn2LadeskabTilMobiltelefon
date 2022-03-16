@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using LadeskabClassLib.USBCharger;
 using LadeskabClassLib.Door;
-using LadeskabClassLib.RfidReader;
 
 namespace LadeskabClassLib.StationControl
 {
@@ -23,6 +22,7 @@ namespace LadeskabClassLib.StationControl
         // Her mangler flere member variable
         private LadeskabState _state;
         private IChargeControl _charger;
+        private IDisplay _display;
         private int _oldId;
         private IDoor _door;
         private IRfidReader _rfidReader;
@@ -30,12 +30,6 @@ namespace LadeskabClassLib.StationControl
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // Her mangler constructor
-        public StationControl(IChargeControl chargeControl, IDoor door, IRfidReader rfidReader)
-        {
-            _charger = chargeControl;
-            _door = door;
-            _rfidReader = rfidReader;
-        }
 
         private void HandleRfidEvent(object sender, RfidChangedEventArgs rfidReader)
         {
@@ -101,5 +95,7 @@ namespace LadeskabClassLib.StationControl
         }
 
         // Her mangler de andre trigger handlere
+
+        
     }
 }
