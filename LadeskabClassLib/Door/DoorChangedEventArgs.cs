@@ -9,5 +9,7 @@ namespace LadeskabClassLib.Door
     public class DoorChangedEventArgs : EventArgs
     {
         public bool Door { get; set; }
+
+        public bool LockingStatus { get; set; }
     }
 }
