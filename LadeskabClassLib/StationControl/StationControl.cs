@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using LadeskabClassLib.USBCharger;
 using LadeskabClassLib.Door;
+using LadeskabClassLib.RfidReader;
+using LadeskabClassLib.Display;
 
 namespace LadeskabClassLib.StationControl
 {
@@ -29,7 +31,13 @@ namespace LadeskabClassLib.StationControl
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
-        // Her mangler constructor
+        public StationControl(IChargeControl chargeControl, IDisplay display, IDoor door, IRfidReader rfidReader)
+        {
+            _charger = chargeControl;
+            _display = display;
+            _door = door;
+            _rfidReader = rfidReader;
+        }
 
         private void HandleRfidEvent(object sender, RfidChangedEventArgs rfidReader)
         {
