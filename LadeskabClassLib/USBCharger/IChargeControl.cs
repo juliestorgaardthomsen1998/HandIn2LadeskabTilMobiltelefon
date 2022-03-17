@@ -8,7 +8,7 @@ namespace LadeskabClassLib.USBCharger
 {
     public interface IChargeControl
     {
-        event EventHandler<USBChargerChangedEventArgs> USBChangedEvent;
+        event EventHandler<CurrentEventArgs> USBChangedEvent;
 
         bool Connected { get; set; }
 

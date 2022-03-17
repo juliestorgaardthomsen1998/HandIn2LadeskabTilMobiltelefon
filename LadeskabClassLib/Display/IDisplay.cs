@@ -8,6 +8,7 @@ namespace LadeskabClassLib.Display
 {
     public interface IDisplay
     {
+        DisplayMeassage DisplayMes { get; set; }
         void UpdateText(DisplayMeassage s);
     }
 }
