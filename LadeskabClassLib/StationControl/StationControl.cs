@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using LadeskabClassLib.USBCharger;
 using LadeskabClassLib.Door;
 using LadeskabClassLib.Display;
+using LadeskabClassLib.LogFile;
 using LadeskabClassLib.RfidReader;
 
 namespace LadeskabClassLib.StationControl
@@ -28,21 +29,24 @@ namespace LadeskabClassLib.StationControl
         private int _oldId;
         private IDoor _door;
         private IRfidReader _rfidReader;
+        private ILogFile _logFile;
         private int rfidID;
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
-        public StationControl(IChargeControl chargeControl, IDisplay display, IDoor door, IRfidReader rfidReader)
+        public StationControl(IChargeControl chargeControl, IDisplay display, IDoor door, IRfidReader rfidReader, ILogFile logFile)
         {
             _charger = chargeControl;
             _display = display;
             _door = door;
             _rfidReader = rfidReader;
+            _logFile = logFile;
+
         }
 
         private void HandleRfidEvent(int rfidID, RfidChangedEventArgs rfidReader)
         {
-            if (_door.IsLocked == false&&_door.IsOpen==false) // hvis døren ikke er låst. Skal lige have lavet det ordenligt
+            if (_door.IsLocked == false && _door.IsOpen==false) // hvis døren ikke er låst. Skal lige have lavet det ordenligt
             {
                 switch (_charger.Connected()) // hvorfor virker denne ikke?
                 {
