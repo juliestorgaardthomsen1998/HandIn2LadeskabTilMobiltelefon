@@ -40,7 +40,7 @@ namespace LadeskabClassLib.StationControl
         private void HandleRfidEvent(object sender, RfidChangedEventArgs rfidReader)
         {
             if (_door.OldLockingStatus == false &&
-                _door.OldDoorStatus == false) // hvis døren ikke er låst. Skal lige have lavet det ordenligt
+                _door.OldDoorStatus == false) 
             {
                 switch (_charger.Connected) // hvorfor virker denne ikke?
                 {
