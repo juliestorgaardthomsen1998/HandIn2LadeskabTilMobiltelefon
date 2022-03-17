@@ -15,7 +15,7 @@ namespace LadeskabClassLib.RfidReader
             RfidChangedEvent?.Invoke(this, eventArgs);
         }
 
-        public void RfidChanged(int id)
+        public void RfidChanged(string id)
         {
             RfidReaderIsActivated(new RfidChangedEventArgs
             {

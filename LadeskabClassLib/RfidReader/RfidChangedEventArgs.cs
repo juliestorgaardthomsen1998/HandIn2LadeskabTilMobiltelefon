@@ -8,6 +8,6 @@ namespace LadeskabClassLib.RfidReader
 {
     public class RfidChangedEventArgs : EventArgs
     {
-        public int  ID { get; set; }
+        public string  ID { get; set; }
     }
 }
