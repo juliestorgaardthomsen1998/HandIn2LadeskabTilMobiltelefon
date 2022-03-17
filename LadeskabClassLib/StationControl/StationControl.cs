@@ -46,7 +46,7 @@ namespace LadeskabClassLib.StationControl
 
         private void HandleRfidEvent(int rfidID, RfidChangedEventArgs rfidReader)
         {
-            if (_door.IsLocked == false && _door.IsOpen==false) // hvis døren ikke er låst. Skal lige have lavet det ordenligt
+            if (_door.IsLocked == false && _door.IsOpen == false) // hvis døren ikke er låst. Skal lige have lavet det ordenligt
             {
                 switch (_charger.Connected()) // hvorfor virker denne ikke?
                 {

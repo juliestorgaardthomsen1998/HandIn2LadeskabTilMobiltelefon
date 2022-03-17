@@ -27,7 +27,7 @@ namespace LadeskabClassLib.Door
             if (newLockingStatus != oldLockingStatus)
             {
                 OnDoorChanged(new DoorChangedEventArgs { LockingStatus = newLockingStatus });
-                oldDoorStatus = newLockingStatus;
+                oldLockingStatus = newLockingStatus;
             }
         }
 
