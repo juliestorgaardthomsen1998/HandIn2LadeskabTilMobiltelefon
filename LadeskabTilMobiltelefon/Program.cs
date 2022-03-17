@@ -1,5 +1,10 @@
 ﻿using System;
+using LadeskabClassLib.Display;
 using LadeskabClassLib.Door;
+using LadeskabClassLib.LogFile;
+using LadeskabClassLib.RfidReader;
+using LadeskabClassLib.StationControl;
+using LadeskabClassLib.USBCharger;
 
 namespace LadeskabTilMobiltelefon
 {
@@ -8,6 +13,14 @@ namespace LadeskabTilMobiltelefon
         static void Main(string[] args)
         {
             Door door = new Door();
+            UsbChargerSimulator usbSimulator = new UsbChargerSimulator();
+            IChargeControl chargeControl = new ChargeControl();
+            IDisplay display = new Display();
+            ILogFile logFile = new LogFile(new TimeProvider(), new FileWriter());
+            IRfidReader rfidReader = new RfidReader();
+
+            StationControl stationControl = new StationControl(chargeControl, display, door, rfidReader, logFile);
+
 
             Console.WriteLine("Ladeskab til mobiltelefon");
 
@@ -17,8 +30,8 @@ namespace LadeskabTilMobiltelefon
             do
             {
                 string input;
-                System.Console.WriteLine("Indtast E, O, C, R: ");
-                input = Console.ReadLine();
+                System.Console.WriteLine("Indtast E(exit), O(open door), C(close door), R(læs Rfid), P(plug), U(unplog), L(overload), N(not overload): ");
+                input = Console.ReadLine().ToUpper();
                 if (string.IsNullOrEmpty(input)) continue;
 
                 switch (input[0])
@@ -38,9 +51,20 @@ namespace LadeskabTilMobiltelefon
                     case 'R':
                         System.Console.WriteLine("Indtast RFID id: ");
                         string idString = System.Console.ReadLine();
-
-                        int id = Convert.ToInt32(idString);
-                        rfidReader.OnRfidRead(id);
+                        
+                        rfidReader.RfidChanged(idString);
+                        break;
+                    case 'P':
+                        usbSimulator.SimulateConnected(true);
+                        break;
+                    case 'U':
+                        usbSimulator.SimulateConnected(false);
+                        break;
+                    case 'L':
+                        usbSimulator.SimulateOverload(true);
+                        break;
+                    case 'N':
+                        usbSimulator.SimulateConnected(false);
                         break;
 
                     default:
