@@ -56,6 +56,7 @@ namespace LadeskabClassLib.Door
         public void OnDoorOpen()
         {
             SetDoor(true);
+            
         }
 
         public void OnDoorClose()
