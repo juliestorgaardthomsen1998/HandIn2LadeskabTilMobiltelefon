@@ -8,26 +8,29 @@ namespace LadeskabClassLib.Door
 {
     public class Door : IDoor
     {
-        private bool oldDoorStatus = false;
-        private bool oldLockingStatus = false;
+        public bool OldDoorStatus { get; set; } = false;
+        public bool OldLockingStatus { get; set; } = false;
 
         public event EventHandler<DoorChangedEventArgs> DoorChangedEvent;
 
         public void SetDoor(bool newDoorStatus)
         {
-            if (newDoorStatus != oldDoorStatus)
+            if (newDoorStatus != OldDoorStatus)
             {
                 OnDoorChanged(new DoorChangedEventArgs { Door = newDoorStatus });
-                oldDoorStatus = newDoorStatus;
+                OldDoorStatus = newDoorStatus;
             }
         }
 
         public void SetLockingDoor(bool newLockingStatus)
         {
-            if (newLockingStatus != oldLockingStatus)
+            if (newLockingStatus != OldLockingStatus)
             {
                 OnDoorChanged(new DoorChangedEventArgs { LockingStatus = newLockingStatus });
-                oldLockingStatus = newLockingStatus;
+
+                OldLockingStatus = newLockingStatus;
+
+                OldLockingStatus = newLockingStatus;
             }
         }
 
