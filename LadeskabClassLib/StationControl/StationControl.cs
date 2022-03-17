@@ -145,6 +145,19 @@ namespace LadeskabClassLib.StationControl
             
         }
 
+        private void HandleDoorEvent(object sender, DoorChangedEventArgs doorstatus)
+        {
+            switch (doorstatus.LockingStatus)
+            {
+                case true:
+                    _display.UpdateText(DisplayMeassage.TilslutTelefon);
+                    break;
+                default:
+                    _display.UpdateText(DisplayMeassage.IndlæsRFID);
+                    break;
+            }
+        }
+
         // Her mangler de andre trigger handlere
         private bool CheckId(int id)
         {
