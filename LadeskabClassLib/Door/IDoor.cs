@@ -15,6 +15,7 @@ namespace LadeskabClassLib.Door
         void UnlockDoor();
 
         void OnDoorOpen();
+
         void OnDoorClose();
     }
 }
