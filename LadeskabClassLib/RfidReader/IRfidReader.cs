@@ -9,5 +9,6 @@ namespace LadeskabClassLib.RfidReader
     public interface IRfidReader
     {
         event EventHandler<RfidChangedEventArgs> RfidChangedEvent;
+        public void RfidChanged(string id);
     }
 }

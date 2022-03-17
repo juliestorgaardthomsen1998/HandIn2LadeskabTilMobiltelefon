@@ -17,6 +17,8 @@ namespace LadeskabClassLib.LogFile
             _timeProvider = timeProvider;
         }
 
+        
+
         public void DoorUnlocked(string rfid_Id)
         {
             string time = _timeProvider.GetTime();
