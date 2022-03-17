@@ -8,6 +8,10 @@ namespace LadeskabClassLib.Door
 {
     public interface IDoor
     {
+        bool OldDoorStatus { get; set; }
+
+        bool OldLockingStatus { get; set; }
+
         event EventHandler<DoorChangedEventArgs> DoorChangedEvent;
 
         void LockDoor();
