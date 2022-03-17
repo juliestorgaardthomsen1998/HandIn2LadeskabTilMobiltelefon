@@ -79,7 +79,7 @@ namespace LadeskabClassLib.StationControl
 
         private void HandleDoorEvent(object sender, DoorChangedEventArgs doorstatus)
         {
-            switch (doorstatus.LockingStatus)
+            switch (doorstatus.DoorStatus)
             {
                 case true:
                     _display.UpdateText(DisplayMeassage.TilslutTelefon);
