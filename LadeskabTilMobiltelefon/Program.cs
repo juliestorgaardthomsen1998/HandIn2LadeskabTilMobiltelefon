@@ -14,8 +14,8 @@ namespace LadeskabTilMobiltelefon
         {
             Door door = new Door();
             UsbChargerSimulator usbSimulator = new UsbChargerSimulator();
-            IChargeControl chargeControl = new ChargeControl();
             IDisplay display = new Display();
+            IChargeControl chargeControl = new ChargeControl(display, usbSimulator);
             ILogFile logFile = new LogFile(new TimeProvider(), new FileWriter());
             IRfidReader rfidReader = new RfidReader();
 

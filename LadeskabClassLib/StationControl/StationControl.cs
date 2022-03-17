@@ -22,7 +22,7 @@ namespace LadeskabClassLib.StationControl
         private ILogFile _logFile;
         private string rfidID;
 
-        private string logFile = "logfile.txt"; // Navnet på systemets log-fil
+        
 
         public StationControl(IChargeControl chargeControl, IDisplay display, IDoor door, IRfidReader rfidReader,
             ILogFile logFile)
@@ -30,7 +30,9 @@ namespace LadeskabClassLib.StationControl
             _charger = chargeControl;
             _display = display;
             _door = door;
+            _door.DoorChangedEvent += HandleDoorEvent;
             _rfidReader = rfidReader;
+            _rfidReader.RfidChangedEvent += HandleRfidEvent;
             _logFile = logFile;
 
         }
