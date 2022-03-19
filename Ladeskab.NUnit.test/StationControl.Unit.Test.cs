@@ -58,12 +58,12 @@ namespace Ladeskab.NUnit.test
         }
 
         //Tester om DisplayMessage viser tilslutningsfejl, hvis telefonen ikke er tilsluttet korrekt efter Rfid er indlæst.
-        [Test]
-        public void handleRfidEvent_ChargerIsNotConnected(bool doorStatus, DisplayMeassage displayMeassage)
-        {
-            //Act
+        //[Test]
+        //public void handleRfidEvent_ChargerIsNotConnected(bool doorStatus, DisplayMeassage displayMeassage)
+        //{
+        //    Act
 
-            //Assert
-        }
+        //    Assert
+        //}
     }
 }
