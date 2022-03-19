@@ -42,12 +42,12 @@ namespace LadeskabClassLib.StationControl
             if (_door.OldLockingStatus == false &&
                 _door.OldDoorStatus == false) 
             {
-                switch (_charger.Connected) // hvorfor virker denne ikke?
+                switch (_charger.Connected) 
                 {
                     case true:
                         rfidID = rfidReader.ID;
                         _charger.StartCharge();
-                        _door.LockDoor(); // skal denne kunne tage et ID?
+                        _door.LockDoor();
                         _logFile.DoorLocked((rfidID));
                         _display.UpdateText(DisplayMeassage.LadeskabOptaget);
                         break;
@@ -77,9 +77,9 @@ namespace LadeskabClassLib.StationControl
         }
 
 
-        private void HandleDoorEvent(object sender, DoorChangedEventArgs doorstatus)
+        private void HandleDoorEvent(object sender, DoorChangedEventArgs doorStatus)
         {
-            switch (doorstatus.LockingStatus)
+            switch (doorStatus.LockingStatus)
             {
                 case true:
                     _display.UpdateText(DisplayMeassage.TilslutTelefon);
