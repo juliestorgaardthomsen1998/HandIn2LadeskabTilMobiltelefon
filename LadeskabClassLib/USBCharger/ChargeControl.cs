@@ -11,7 +11,7 @@ namespace LadeskabClassLib.USBCharger
     {
         private IUsbCharger _usbCharger;
         private IDisplay _display;
-        public double CurrentCurrent { get; set; }
+        public double? CurrentCurrent { get; set; }
         private const int ZeroCurrent = 0;
         private const int TelefonOpladet = 5;
         private const int Ladestrøm = 500;
