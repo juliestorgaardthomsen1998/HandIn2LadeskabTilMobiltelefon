@@ -16,13 +16,10 @@ namespace LadeskabClassLib.StationControl
     {
         private IChargeControl _charger;
         private IDisplay _display;
-        private int _oldId;
         private IDoor _door;
         private IRfidReader _rfidReader;
         private ILogFile _logFile;
         private string rfidID;
-
-        
 
         public StationControl(IChargeControl chargeControl, IDisplay display, IDoor door, IRfidReader rfidReader,
             ILogFile logFile)

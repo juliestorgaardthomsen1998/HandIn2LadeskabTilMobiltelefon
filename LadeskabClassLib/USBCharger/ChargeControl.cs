@@ -25,6 +25,7 @@ namespace LadeskabClassLib.USBCharger
         {
             _display = display;
             _usbCharger = usb;
+            _usbCharger.CurrentValueEvent += HandleUSBChargerEvent;
         }
 
         private void HandleUSBChargerEvent(object sender, CurrentEventArgs e)
@@ -65,18 +66,7 @@ namespace LadeskabClassLib.USBCharger
 
         public bool IsConnected()
         {
-            if(_usbCharger.Connected == true)
-            {
-                return true;
-
-                Connected = true;
-            }
-            else
-            {
-                return false;
-
-                Connected = false;
-            }
+            return _usbCharger.Connected;
         }
 
         public void StartCharge()
