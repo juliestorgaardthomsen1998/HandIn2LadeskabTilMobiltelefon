@@ -33,16 +33,17 @@ namespace Ladeskab.NUnit.test
         [TestCase("11.1")]
         public void DoorUnlocked_LogLineIsCorrect(string id)
         {
+            //Act
             uut.DoorUnlocked(id);
 
             var time = timeProvider.GetTime();
-
             string logLine = "Door was unlocked at " + time + " with Rfid id: " + id;
 
+            //Assert
             Assert.That(uut.LogLine, Is.EqualTo(logLine));
 
-            timeProvider.Received(1);
-            fileWriter.Received(1);
+            timeProvider.Received(2).GetTime();
+            fileWriter.Received(1).WriteLineToFile(logLine);
         }
 
         [TestCase("")]
@@ -50,16 +51,17 @@ namespace Ladeskab.NUnit.test
         [TestCase("11.1")]
         public void DoorLocked_LogLineIsCorrect(string id)
         {
+            //Act
             uut.DoorLocked(id);
 
             var time = timeProvider.GetTime();
-
             string logLine = "Door was locked at " + time + " with Rfid id: " + id;
 
+            //Assert
             Assert.That(uut.LogLine, Is.EqualTo(logLine));
 
-            timeProvider.Received(1);
-            fileWriter.Received(1);
+            timeProvider.Received(2).GetTime();
+            fileWriter.Received(1).WriteLineToFile(logLine);
         }
 
     }

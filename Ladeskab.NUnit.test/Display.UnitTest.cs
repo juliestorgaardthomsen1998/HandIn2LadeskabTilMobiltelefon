@@ -7,13 +7,21 @@ namespace Ladeskab.NUnit.test
     [TestFixture]
     public class DisplayUnitTest
     {
-        private IDisplay _uut;
+        private IDisplay uut;
 
         [SetUp]
         public void Setup()
         {
-            _uut = new Display();
+            uut = new Display();
         }
+
+        //[Test]
+        //public void ctor_DisplayMesIsNull()
+        //{
+        //    DisplayMeassage d = 0;
+
+        //    Assert.That(uut.DisplayMes, Is.EqualTo(uut.DisplayMes));
+        //}
 
         [TestCase(DisplayMeassage.TilslutTelefon)]
         [TestCase(DisplayMeassage.Tilslutningsfejl)]
@@ -27,20 +35,10 @@ namespace Ladeskab.NUnit.test
         public void UpdateText_DisplayMesIsCorrect(DisplayMeassage m)
         {
             //Act
-            _uut.UpdateText(m);
+            uut.UpdateText(m);
 
             //Assert
-            Assert.That(_uut.DisplayMes, Is.EqualTo(m));
-        }
-
-        [TestCase()]
-        public void UpdateText_(DisplayMeassage m)
-        {
-            //Act
-            _uut.UpdateText(m);
-
-            //Assert
-            Assert.That(_uut.DisplayMes, Is.EqualTo(m));
+            Assert.That(uut.DisplayMes, Is.EqualTo(m));
         }
     }
 }
