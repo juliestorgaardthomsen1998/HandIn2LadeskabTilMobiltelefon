@@ -40,5 +40,11 @@ namespace Ladeskab.NUnit.test
             //Assert
             Assert.That(uut.DisplayMes, Is.EqualTo(m));
         }
+
+        //[Test]
+        //public void UpdateText_TestIfDefaultMessageIsCorrect_()
+        //{
+
+        //}
     }
 }

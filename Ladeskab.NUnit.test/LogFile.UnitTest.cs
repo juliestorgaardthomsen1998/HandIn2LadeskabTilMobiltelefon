@@ -42,6 +42,7 @@ namespace Ladeskab.NUnit.test
             //Assert
             Assert.That(uut.LogLine, Is.EqualTo(logLine));
 
+            //Assert på mocks
             timeProvider.Received(2).GetTime();
             fileWriter.Received(1).WriteLineToFile(logLine);
         }
@@ -60,6 +61,7 @@ namespace Ladeskab.NUnit.test
             //Assert
             Assert.That(uut.LogLine, Is.EqualTo(logLine));
 
+            //Assert på mocks
             timeProvider.Received(2).GetTime();
             fileWriter.Received(1).WriteLineToFile(logLine);
         }
