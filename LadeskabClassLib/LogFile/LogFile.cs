@@ -10,6 +10,7 @@ namespace LadeskabClassLib.LogFile
     {
         private readonly IFileWriter _fileWriter;
         private readonly ITimeProvider _timeProvider;
+        public string LogLine { get; set; }
 
         public LogFile(ITimeProvider timeProvider, IFileWriter fileWriter)
         {
@@ -23,18 +24,18 @@ namespace LadeskabClassLib.LogFile
         {
             string time = _timeProvider.GetTime();
 
-            string logLine = "Door was unlocked at " + time + " with Rfid id: " + rfid_Id;
+            LogLine = "Door was unlocked at " + time + " with Rfid id: " + rfid_Id;
 
-            _fileWriter.WriteLineToFile(logLine);
+            _fileWriter.WriteLineToFile(LogLine);
         }
 
         public void DoorLocked(string rfid_Id)
         {
             string time = _timeProvider.GetTime();
 
-            string logLine = "Door was locked at " + time + " with Rfid id: " + rfid_Id;
+            LogLine = "Door was locked at " + time + " with Rfid id: " + rfid_Id;
 
-            _fileWriter.WriteLineToFile(logLine);
+            _fileWriter.WriteLineToFile(LogLine);
         }
     }
 }

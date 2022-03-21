@@ -37,6 +37,7 @@ namespace Ladeskab.NUnit.test
             uut = new StationControl(chargeControl,display,door,rfidReader,logFile);
         }
 
+        #region ZeroTest (display er tomt ved start)
         //Tester at display ikke har en DisplayMessage, når der ikke er kaldt nogen metoder til UUT. (Zero-test)
         [Test]
         public void setUpUUT_NoMessageOnDisplay()
@@ -44,26 +45,168 @@ namespace Ladeskab.NUnit.test
             //Act //Assert
             display.DidNotReceive().UpdateText(Arg.Any<DisplayMeassage>());
         }
-        
+        #endregion
+
+        #region Test af handleDoorEvent
+
         //Tester om DisplayMessage stemmer overens med status på døren. 
-        [TestCase(true,DisplayMeassage.TilslutTelefon)]
-        [TestCase(false,DisplayMeassage.IndlæsRFID)]
+        [TestCase(true, DisplayMeassage.TilslutTelefon)]
+        [TestCase(false, DisplayMeassage.IndlæsRFID)]
         public void handleDoorEvent_DisplayMeassageIsCorrect(bool doorStatus, DisplayMeassage displayMeassage)
         {
             //Act
-            door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs {DoorStatus = doorStatus});
+            door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs { DoorStatus = doorStatus });
 
             //Assert
             display.Received(1).UpdateText(displayMeassage);
         }
 
-        //Tester om DisplayMessage viser tilslutningsfejl, hvis telefonen ikke er tilsluttet korrekt efter Rfid er indlæst.
-        [Test]
-        public void handleRfidEvent_ChargerIsNotConnected(bool doorStatus, DisplayMeassage displayMeassage)
+
+        #endregion
+
+        #region Test af handleRfidEvent med tomt ladeskab
+
+        //Tester om DisplayMessage er korrekt afhængig om telfonen bliver sat korrekt i opladeren.
+        [TestCase(true, DisplayMeassage.LadeskabOptaget)]
+        [TestCase(false, DisplayMeassage.Tilslutningsfejl)]
+        public void handleRfidEvent_ChargerConnectedAndNotConnected_DisplayMeassageIsCorrect(bool chargerConnection, DisplayMeassage displayMeassage)
         {
+            //Arrange
+            chargeControl.Connected = chargerConnection;
+
             //Act
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
 
             //Assert
+            display.Received(1).UpdateText(displayMeassage);
         }
+
+        //Test om opladning startes efter telefon er sat korrekt i opalderen og Rfid indlæses
+        [Test]
+        public void handleRfidEvent_ChargerConnected_ChargingIsStarted()
+        {
+            //Arrange
+            chargeControl.Connected = true;
+
+            //Act
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+
+            //Assert
+            chargeControl.Received(1).StartCharge();
+        }
+
+        //Test om døren låses efter telefon er sat korrekt i opalderen og Rfid indlæses
+        [Test]
+        public void handleRfidEvent_ChargerConnected_DoorIsLocked()
+        {
+            //Arrange
+            chargeControl.Connected = true;
+
+            //Act
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+
+            //Assert
+            door.Received(1).LockDoor();
+        }
+
+        //Test om logfile modtager testID efter telefon er sat korrekt i opalderen og Rfid indlæses
+        [Test]
+        public void handleRfidEvent_ChargerConnected_LogFileRecivesTestID()
+        {
+            //Arrange
+            chargeControl.Connected = true;
+
+            //Act
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+
+            //Assert
+            logFile.Received(1).DoorLocked("testID");
+        }
+        #endregion
+
+        #region Test af handleRfidEvent med ladeskab med telefon. RFID er korrekt.
+        //Test hvor korrekt RFID holdes foran ladeskab. DisplayMeassage bliver FjernTelefon
+        [Test]
+        public void handleRfidEvent_DoorIsLocked_CorrectRfid_DisplayMeassageIsFjernTelefon()
+        {
+            //Arrange
+            chargeControl.Connected = true;
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+            door.OldLockingStatus.Returns(true);
+
+            //Act
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+
+            //Assert
+            display.Received(1).UpdateText(DisplayMeassage.FjernTelefon);
+        }
+
+        //Test hvor korrekt RFID holdes foran ladeskab. Door bliver låst op.
+        [Test]
+        public void handleRfidEvent_DoorIsLocked_CorrectRfid_DoorIsUnlocked()
+        {
+            //Arrange
+            chargeControl.Connected = true;
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+            door.OldLockingStatus.Returns(true);
+
+            //Act
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+
+            //Assert
+            door.Received(1).UnlockDoor();
+        }
+
+        [Test]
+        public void handleRfidEvent_DoorIsLocked_CorrectRfid_ChargedIsStopped()
+        {
+            //Arrange
+            chargeControl.Connected = true;
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+            door.OldLockingStatus.Returns(true);
+
+            //Act
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+
+            //Assert
+            chargeControl.Received(1).StopCharge();
+        }
+
+        [Test]
+        public void handleRfidEvent_DoorIsLocked_CorrectRfid_LogfileRegisterThatDoorIsUnLocked()
+        {
+            //Arrange
+            chargeControl.Connected = true;
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+            door.OldLockingStatus.Returns(true);
+
+            //Act
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+
+            //Assert
+            logFile.Received(1).DoorUnlocked("testID");
+        }
+
+        #endregion
+
+        #region Test af handkeRfidEvent med ladeskab med telefon. RFID IKKE korrekt.
+        [Test]
+        public void handleRfidEvent_DoorIsLocked_WrongRFID_DisplayMessageisRFIDfejl()
+        {
+            //Arrange
+            chargeControl.Connected = true;
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
+            door.OldLockingStatus.Returns(true);
+
+            //Act
+            rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID2" });
+
+            //Assert
+            display.Received(1).UpdateText(DisplayMeassage.RFIDFejl);
+        }
+
+
+        #endregion
+
     }
 }
