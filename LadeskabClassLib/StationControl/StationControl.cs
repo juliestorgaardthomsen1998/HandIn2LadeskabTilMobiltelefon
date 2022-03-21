@@ -33,6 +33,7 @@ namespace LadeskabClassLib.StationControl
             _logFile = logFile;
 
         }
+        //test
 
         private void HandleRfidEvent(object sender, RfidChangedEventArgs rfidReader)
         {
