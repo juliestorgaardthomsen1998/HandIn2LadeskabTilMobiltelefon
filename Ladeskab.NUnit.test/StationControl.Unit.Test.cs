@@ -72,7 +72,7 @@ namespace Ladeskab.NUnit.test
         public void handleRfidEvent_ChargerConnectedAndNotConnected_DisplayMeassageIsCorrect(bool chargerConnection, DisplayMeassage displayMeassage)
         {
             //Arrange
-            chargeControl.IsConnected().Returns(true);
+            chargeControl.IsConnected().Returns(chargerConnection);
 
             //Act
             rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
