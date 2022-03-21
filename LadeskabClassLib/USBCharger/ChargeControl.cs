@@ -16,8 +16,7 @@ namespace LadeskabClassLib.USBCharger
         private const int TelefonOpladet = 5;
         private const int Ladestrøm = 500;
         private const int Kortslutning = 501;
-
-        public bool Connected { get; set; }
+        
 
         public event EventHandler<CurrentEventArgs> USBChangedEvent;
 

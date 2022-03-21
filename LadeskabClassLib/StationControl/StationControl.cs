@@ -39,7 +39,7 @@ namespace LadeskabClassLib.StationControl
             if (_door.OldLockingStatus == false &&
                 _door.OldDoorStatus == false) 
             {
-                switch (_charger.Connected) 
+                switch (_charger.IsConnected()) 
                 {
                     case true:
                         rfidID = rfidReader.ID;
