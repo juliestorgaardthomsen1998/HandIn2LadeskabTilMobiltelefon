@@ -72,7 +72,7 @@ namespace Ladeskab.NUnit.test
         public void handleRfidEvent_ChargerConnectedAndNotConnected_DisplayMeassageIsCorrect(bool chargerConnection, DisplayMeassage displayMeassage)
         {
             //Arrange
-            chargeControl.Connected = chargerConnection;
+            chargeControl.IsConnected().Returns(true);
 
             //Act
             rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
@@ -86,7 +86,8 @@ namespace Ladeskab.NUnit.test
         public void handleRfidEvent_ChargerConnected_ChargingIsStarted()
         {
             //Arrange
-            chargeControl.Connected = true;
+
+            chargeControl.IsConnected().Returns(true);
 
             //Act
             rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
@@ -100,7 +101,7 @@ namespace Ladeskab.NUnit.test
         public void handleRfidEvent_ChargerConnected_DoorIsLocked()
         {
             //Arrange
-            chargeControl.Connected = true;
+            chargeControl.IsConnected().Returns(true);
 
             //Act
             rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
@@ -114,7 +115,8 @@ namespace Ladeskab.NUnit.test
         public void handleRfidEvent_ChargerConnected_LogFileRecivesTestID()
         {
             //Arrange
-            chargeControl.Connected = true;
+
+            chargeControl.IsConnected().Returns(true);
 
             //Act
             rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
@@ -130,7 +132,7 @@ namespace Ladeskab.NUnit.test
         public void handleRfidEvent_DoorIsLocked_CorrectRfid_DisplayMeassageIsFjernTelefon()
         {
             //Arrange
-            chargeControl.Connected = true;
+            chargeControl.IsConnected().Returns(true);
             rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
             door.OldLockingStatus.Returns(true);
 
@@ -146,7 +148,8 @@ namespace Ladeskab.NUnit.test
         public void handleRfidEvent_DoorIsLocked_CorrectRfid_DoorIsUnlocked()
         {
             //Arrange
-            chargeControl.Connected = true;
+
+            chargeControl.IsConnected().Returns(true);
             rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
             door.OldLockingStatus.Returns(true);
 
@@ -161,7 +164,8 @@ namespace Ladeskab.NUnit.test
         public void handleRfidEvent_DoorIsLocked_CorrectRfid_ChargedIsStopped()
         {
             //Arrange
-            chargeControl.Connected = true;
+
+            chargeControl.IsConnected().Returns(true);
             rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
             door.OldLockingStatus.Returns(true);
 
@@ -176,7 +180,8 @@ namespace Ladeskab.NUnit.test
         public void handleRfidEvent_DoorIsLocked_CorrectRfid_LogfileRegisterThatDoorIsUnLocked()
         {
             //Arrange
-            chargeControl.Connected = true;
+
+            chargeControl.IsConnected().Returns(true);
             rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
             door.OldLockingStatus.Returns(true);
 
@@ -194,7 +199,8 @@ namespace Ladeskab.NUnit.test
         public void handleRfidEvent_DoorIsLocked_WrongRFID_DisplayMessageisRFIDfejl()
         {
             //Arrange
-            chargeControl.Connected = true;
+
+            chargeControl.IsConnected().Returns(true);
             rfidReader.RfidChangedEvent += Raise.EventWith(new RfidChangedEventArgs() { ID = "testID" });
             door.OldLockingStatus.Returns(true);
 
