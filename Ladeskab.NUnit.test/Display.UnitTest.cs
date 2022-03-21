@@ -15,14 +15,6 @@ namespace Ladeskab.NUnit.test
             uut = new Display();
         }
 
-        //[Test]
-        //public void ctor_DisplayMesIsNull()
-        //{
-        //    DisplayMeassage d = 0;
-
-        //    Assert.That(uut.DisplayMes, Is.EqualTo(uut.DisplayMes));
-        //}
-
         [TestCase(DisplayMeassage.TilslutTelefon)]
         [TestCase(DisplayMeassage.Tilslutningsfejl)]
         [TestCase(DisplayMeassage.TelefonFuldtOpladet)]
@@ -41,10 +33,14 @@ namespace Ladeskab.NUnit.test
             Assert.That(uut.DisplayMes, Is.EqualTo(m));
         }
 
-        //[Test]
-        //public void UpdateText_TestIfDefaultMessageIsCorrect_()
-        //{
+        [Test]
+        public void UpdateText_TestIfDefaultMessageIsCorrect_()
+        {
+            //Act
+            uut.UpdateText(uut.DisplayMes = 0);
 
-        //}
+            //Assert
+            Assert.That(uut.DisplayMes,Is.EqualTo(default(DisplayMeassage)));
+        }
     }
 }
