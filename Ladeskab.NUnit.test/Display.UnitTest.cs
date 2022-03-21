@@ -37,10 +37,10 @@ namespace Ladeskab.NUnit.test
         public void UpdateText_TestIfDefaultMessageIsCorrect_()
         {
             //Act
-            uut.UpdateText(uut.DisplayMes = 0);
+            uut.UpdateText(DisplayMeassage.UknownError);
 
             //Assert
-            Assert.That(uut.DisplayMes,Is.EqualTo(default(DisplayMeassage)));
+            Assert.That(uut.DisplayMes,Is.EqualTo(DisplayMeassage.UknownError));
         }
     }
 }

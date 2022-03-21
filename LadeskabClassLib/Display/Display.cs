@@ -52,6 +52,7 @@ namespace LadeskabClassLib.Display
                     break;
                 default:
                     Console.WriteLine("Unknown Error");
+                    DisplayMes = DisplayMeassage.UknownError;
                     break;
             }    
                 
