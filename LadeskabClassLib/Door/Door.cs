@@ -28,11 +28,6 @@ namespace LadeskabClassLib.Door
             {
                 OnDoorChanged(new DoorChangedEventArgs { LockingStatus = newLockingStatus });
 
-
-                OldLockingStatus = newLockingStatus;
-
-                OldLockingStatus = newLockingStatus;
-
                 OldLockingStatus = newLockingStatus;
 
             }
@@ -56,7 +51,6 @@ namespace LadeskabClassLib.Door
         public void OnDoorOpen()
         {
             SetDoor(true);
-            
         }
 
         public void OnDoorClose()
