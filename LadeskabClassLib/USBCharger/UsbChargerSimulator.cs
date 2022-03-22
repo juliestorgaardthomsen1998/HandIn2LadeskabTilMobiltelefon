@@ -14,11 +14,11 @@ namespace LadeskabClassLib.USBCharger
 
         public event EventHandler<CurrentEventArgs> CurrentValueEvent;
 
-        public double CurrentValue { get; private set; }
+        public double CurrentValue { get; set; }
 
-        public bool Connected { get; set; }
+        public bool Connected { get; private set; }
 
-        private bool _overload;
+        public bool Overload { get; private set; }
         private bool _charging;
         private System.Timers.Timer _timer;
         private int _ticksSinceStart;
@@ -27,7 +27,7 @@ namespace LadeskabClassLib.USBCharger
         {
             CurrentValue = 0.0;
             Connected = true;
-            _overload = false;
+            Overload = false;
 
             _timer = new System.Timers.Timer();
             _timer.Enabled = false;
@@ -41,13 +41,13 @@ namespace LadeskabClassLib.USBCharger
             if (_charging)
             {
                 _ticksSinceStart++;
-                if (Connected && !_overload)
+                if (Connected && !Overload)
                 {
                     double newValue = MaxCurrent -
                                       _ticksSinceStart * (MaxCurrent - FullyChargedCurrent) / (ChargeTimeMinutes * 60 * 1000 / CurrentTickInterval);
                     CurrentValue = Math.Max(newValue, FullyChargedCurrent);
                 }
-                else if (Connected && _overload)
+                else if (Connected && Overload)
                 {
                     CurrentValue = OverloadCurrent;
                 }
@@ -67,7 +67,7 @@ namespace LadeskabClassLib.USBCharger
 
         public void SimulateOverload(bool overload)
         {
-            _overload = overload;
+            Overload = overload;
         }
 
         public void StartCharge()
@@ -75,11 +75,11 @@ namespace LadeskabClassLib.USBCharger
             // Ignore if already charging
             if (!_charging)
             {
-                if (Connected && !_overload)
+                if (Connected && !Overload)
                 {
                     CurrentValue = 500;
                 }
-                else if (Connected && _overload)
+                else if (Connected && Overload)
                 {
                     CurrentValue = OverloadCurrent;
                 }

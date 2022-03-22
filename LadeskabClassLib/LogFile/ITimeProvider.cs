@@ -8,6 +8,6 @@ namespace LadeskabClassLib.LogFile
 {
     public interface ITimeProvider
     {
-        public string GetTime();
+        string GetTime();
     }
 }

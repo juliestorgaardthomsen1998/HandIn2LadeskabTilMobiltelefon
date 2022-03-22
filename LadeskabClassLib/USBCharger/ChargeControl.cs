@@ -12,10 +12,10 @@ namespace LadeskabClassLib.USBCharger
         private IUsbCharger _usbCharger;
         private IDisplay _display;
         public double? CurrentCurrent { get; set; }
-        private const int ZeroCurrent = 0;
-        private const int TelefonOpladet = 5;
-        private const int Ladestrøm = 500;
-        private const int Kortslutning = 501;
+        private const int _zeroCurrent = 0;
+        private const int _telefonOpladet = 5;
+        private const int _ladestrøm = 500;
+        private const int _kortslutning = 501;
         
 
         public event EventHandler<CurrentEventArgs> USBChangedEvent;
@@ -38,21 +38,21 @@ namespace LadeskabClassLib.USBCharger
 
             switch (CurrentCurrent)
             {
-                case <= ZeroCurrent:
+                case <= _zeroCurrent:
                     break;
-                case <= TelefonOpladet:
+                case <= _telefonOpladet:
                     if (_display.DisplayMes != DisplayMeassage.TelefonFuldtOpladet)
                     {
                         _display.UpdateText(DisplayMeassage.TelefonFuldtOpladet);
                     }
                     break;
-                case <= Ladestrøm:
+                case <= _ladestrøm:
                     if (_display.DisplayMes != DisplayMeassage.LadningIgang)
                     {
                         _display.UpdateText(DisplayMeassage.LadningIgang);
                     }
                     break;
-                case >= Kortslutning:
+                case >= _kortslutning:
                     if (_display.DisplayMes != DisplayMeassage.Kortslutning)
                     {
                         _display.UpdateText(DisplayMeassage.Kortslutning);
