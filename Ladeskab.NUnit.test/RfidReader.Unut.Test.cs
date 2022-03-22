@@ -33,7 +33,7 @@ namespace Ladeskab.NUnit.test
         #region Zero
 
         [Test]
-        public void RfidDetected_NoMethodCall()
+        public void Rfid_zero_NoMethodCall_expect_event_not_fired()
         {
             Assert.That(eventArgs, Is.Null);
         }
@@ -43,7 +43,7 @@ namespace Ladeskab.NUnit.test
         #region One
 
         [TestCase("Test")]
-        public void RfidDetected_one_callmethod(string Rfid)
+        public void Rfid_one_callmethod_expect_rfid_is_rfid_and_event_is_fired(string Rfid)
         {
             //Act
             uut.RfidChanged(Rfid);
@@ -65,7 +65,7 @@ namespace Ladeskab.NUnit.test
         [TestCase("")]
         [TestCase("123")]
         [TestCase("ID")]
-        public void Rfid_many_callmethod(string Rfid)
+        public void Rfid_many_callmethod_expect_rfid_is_rfid_and_event_is_fired(string Rfid)
         {
             //Act
             uut.RfidChanged(Rfid);
@@ -80,7 +80,7 @@ namespace Ladeskab.NUnit.test
 
         //Kalder metoden flere gange med forskellige parameter. Tester at ID gemmes ved det sidste kald
         [Test]
-        public void Rfid_callMethodManyTimes()
+        public void Rfid_callMethodManyTimes_expect_rfid_is_rfid_and_event_is_fired()
         {
             //Act
             uut.RfidChanged("test");
