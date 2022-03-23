@@ -24,9 +24,18 @@ namespace Ladeskab.NUnit.test
             };
         }
         [Test]
-        public void Rfid_zero_NoMethodCall_expect_event_not_fired()
+        public void LuckDoor_StartesUnLuckedAndClosed_Exppect_True()
         {
-            Assert.That(eventArgs, Is.Null);
+            //UUT Starter lukket og ulåst
+            //Arrange 
+
+
+            //Act
+            uut.LockDoor();
+            uut.LockDoor();
+
+            //Assert
+            Assert.That(uut.OldLockingStatus, Is.True);
         }
 
 
