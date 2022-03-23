@@ -64,7 +64,12 @@ namespace Ladeskab.NUnit.test
             uut.UnlockDoor();
 
             //Assert
-            Assert.That(uut.OldLockingStatus, Is.False);
+            Assert.Multiple(() =>
+            {
+                Assert.That(uut.OldLockingStatus, Is.False);
+                Assert.That(eventArgs.LockingStatus, Is.False);
+            });
+            
         }
 
         #endregion
