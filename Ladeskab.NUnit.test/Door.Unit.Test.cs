@@ -11,7 +11,7 @@ namespace Ladeskab.NUnit.test
     public class DoorTest
     {
         private DoorChangedEventArgs eventArgs;
-        private Door uut;
+        private IDoor uut;
 
         [SetUp]
         public void Setup()
