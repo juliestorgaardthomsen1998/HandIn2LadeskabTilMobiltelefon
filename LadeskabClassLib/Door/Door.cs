@@ -33,7 +33,7 @@ namespace LadeskabClassLib.Door
             }
         }
 
-        protected virtual void OnDoorChanged(DoorChangedEventArgs e)
+        public void OnDoorChanged(DoorChangedEventArgs e)
         {
             DoorChangedEvent?.Invoke(this, e);
         }
