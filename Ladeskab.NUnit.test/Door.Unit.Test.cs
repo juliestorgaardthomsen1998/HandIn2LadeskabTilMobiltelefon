@@ -23,6 +23,11 @@ namespace Ladeskab.NUnit.test
                 eventArgs = args;
             };
         }
+        [Test]
+        public void Rfid_zero_NoMethodCall_expect_event_not_fired()
+        {
+            Assert.That(eventArgs, Is.Null);
+        }
 
 
         #region Tester LockDoor
@@ -163,5 +168,6 @@ namespace Ladeskab.NUnit.test
         }
 
         #endregion
+        
     }
 }
