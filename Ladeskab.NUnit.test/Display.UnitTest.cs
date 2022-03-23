@@ -34,7 +34,7 @@ namespace Ladeskab.NUnit.test
         }
 
         [Test]
-        public void UpdateText_TestIfDefaultMessageIsCorrect_()
+        public void UpdateText_TestIfDefaultMessageIsCorrect()
         {
             //Act
             uut.UpdateText(DisplayMeassage.UknownError);

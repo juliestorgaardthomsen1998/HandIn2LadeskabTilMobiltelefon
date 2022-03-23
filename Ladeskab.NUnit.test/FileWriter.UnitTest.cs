@@ -1,5 +1,6 @@
 ﻿using LadeskabClassLib.LogFile;
 using NSubstitute;
+using System.IO;
 using NUnit.Framework;
 
 namespace Ladeskab.NUnit.test
@@ -18,13 +19,13 @@ namespace Ladeskab.NUnit.test
 
         [TestCase(" ")]
         [TestCase("test")]
-        public void WriteLineToFile_(string l)
+        public void WriteLineToFile_LinePropertyIsEqualToLineInMethod(string line)
         {
             //Act
-            uut.WriteLineToFile(l);
+            uut.WriteLineToFile(line);
 
             //Assert
-            //Assert.That();
+            Assert.That(uut.Line,Is.EqualTo(line));
         }
 
     }

@@ -11,6 +11,8 @@ namespace LadeskabClassLib.LogFile
     {
         private string filename = "Logfile.txt";
 
+        public string Line { get; set; }
+
         //Denne metode gemmer line i en ny fil hvis den ikke er oprettet, ellers skriver den blot til i bunden af filen
 
         public void WriteLineToFile(string line)
@@ -20,6 +22,7 @@ namespace LadeskabClassLib.LogFile
                 using StreamWriter sw = new StreamWriter(File.Create(filename));
                 {
                     sw.WriteLine(line);
+                    Line = line;
                 }
             }
             else
@@ -27,6 +30,7 @@ namespace LadeskabClassLib.LogFile
                 using (StreamWriter sw = File.AppendText(filename))
                 {
                     sw.WriteLine(line);
+                    Line = line;
                 }
             }
         }
