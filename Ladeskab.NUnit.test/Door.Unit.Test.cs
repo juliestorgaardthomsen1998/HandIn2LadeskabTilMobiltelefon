@@ -23,22 +23,7 @@ namespace Ladeskab.NUnit.test
                 eventArgs = args;
             };
         }
-        [Test]
-        public void LuckDoor_StartesUnLuckedAndClosed_Exppect_True()
-        {
-            //UUT Starter lukket og ulåst
-            //Arrange 
-
-
-            //Act
-            uut.LockDoor();
-            uut.LockDoor();
-
-            //Assert
-            Assert.That(uut.OldLockingStatus, Is.True);
-        }
-
-
+        
         #region Tester LockDoor
 
         [Test]
@@ -55,6 +40,7 @@ namespace Ladeskab.NUnit.test
 
             //Assert
             Assert.That(uut.OldLockingStatus, Is.True);
+            Assert.That(eventArgs, Is.Not.Null);
         }
         #endregion
 
